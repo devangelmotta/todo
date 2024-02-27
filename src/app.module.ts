@@ -5,16 +5,11 @@ import { ConfigModule } from '@nestjs/config'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { MongooseModule } from '@nestjs/mongoose'
 
+const DB_URI = `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_USER}@cluster0.ynatajt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot(),
-    MongooseModule.forRoot(process.env.DATABASE_URI, {
-      dbName: process.env.DATABASE_NAME,
-      // auth: {
-      //   username: process.env.DATABASE_USER,
-      //   password: process.env.DATABASE_PASS,
-      // },
-    }),],
+    MongooseModule.forRoot(process.env.DATABASE_URI)],
   controllers: [AppController],
   providers: [AppService],
 })
