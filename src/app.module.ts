@@ -7,11 +7,13 @@ import { ThrottlerModule } from '@nestjs/throttler'
 import { MongooseModule } from '@nestjs/mongoose'
 
 const DB_URI = `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@cluster0.ynatajt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-console.log(DB_URI)
+
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot({throttlers: [{limit: 10, ttl: 60}]}),
     MongooseModule.forRoot(DB_URI),
-  TodoModule],
+    TodoModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

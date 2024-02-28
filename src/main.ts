@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common'
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet'
 import * as compression from 'compression'
 
@@ -13,6 +14,18 @@ async function bootstrap() {
   app.enableVersioning({ type: VersioningType.URI })
   app.use(helmet())
   app.use(compression())
+
+  const options = new DocumentBuilder()
+    .setTitle('A Simple Todo API')
+    .setDescription('Un API en internet solo para ustedes')
+    .setVersion('1.0')
+    .addServer('http://localhost:4000/', 'Local environment')
+    .addServer('https://todo-para-isa.zeabur.app/', 'Develop')
+    .addTag('Todo')
+    .build();
+
+const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api-docs', app, document);
 
   await app.listen(PORT, () => {
     console.log(`🚀 Application running at port ${PORT}`)

@@ -14,7 +14,7 @@ export class TodoController {
     return this.todoService.createTodo(body)
   }
 
-  @Get('/list')
+  @Get('/')
   listTodo() {
     return this.todoService.listTodo()
   }
