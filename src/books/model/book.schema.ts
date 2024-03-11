@@ -7,7 +7,28 @@ export type BookDocument = HydratedDocument<Book>
 @Schema({ collection: 'books', timestamps: true })
 export class Book {
   @Prop()
-  book: IBook
+  title: string
+  
+  @Prop()
+  pages: number
+
+  @Prop()
+  genre: string
+
+  @Prop()
+  cover: string
+
+  @Prop()
+  synopsis: string
+
+  @Prop()
+  year: number
+
+  @Prop()
+  ISBN: string
+
+  @Prop()
+  author: string
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book)

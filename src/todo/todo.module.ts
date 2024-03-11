@@ -10,7 +10,7 @@ import { Todo, TodoSchema } from './model/todo.schema'
         .forFeature([{
              name: Todo.name, 
              schema: TodoSchema,
-             }]),
+             }])
     ],
     providers: [TodoService],
   controllers: [TodoController],
