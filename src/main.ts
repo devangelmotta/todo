@@ -16,12 +16,12 @@ async function bootstrap() {
   app.use(compression())
 
   const options = new DocumentBuilder()
-    .setTitle('A Simple Todo API')
+    .setTitle('A Simple API')
     .setDescription('Un API en internet solo para ustedes')
     .setVersion('1.0')
-    .addServer('http://localhost:4000/', 'Local environment')
     .addServer('https://todo-para-isa.zeabur.app/', 'Develop')
     .addTag('Todo')
+    .addTag('Books')
     .build();
 
 const document = SwaggerModule.createDocument(app, options);
