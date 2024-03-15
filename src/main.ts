@@ -3,12 +3,15 @@ import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet'
+import * as bodyParser from 'body-parser';
 import * as compression from 'compression'
 
 const PORT = parseInt(process.env.PORT, 10) || 4000
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.use(bodyParser.json({limit: '50mb'}));
+  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
   app.enableCors({ origin: '*' })
   app.useGlobalPipes(new ValidationPipe({}))
   app.enableVersioning({ type: VersioningType.URI })

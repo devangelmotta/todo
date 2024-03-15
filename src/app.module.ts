@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { MongooseModule } from '@nestjs/mongoose'
 import { BooksModule } from './books/books.module';
-
+import { PinterestModule } from './pinterest/pinterest.module';
 const DB_URI = `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@cluster0.ynatajt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 @Module({
@@ -14,7 +14,8 @@ const DB_URI = `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABAS
     ThrottlerModule.forRoot({throttlers: [{limit: 10, ttl: 60}]}),
     MongooseModule.forRoot(DB_URI),
     TodoModule,
-    BooksModule
+    BooksModule,
+    PinterestModule
   ],
   controllers: [AppController],
   providers: [AppService],

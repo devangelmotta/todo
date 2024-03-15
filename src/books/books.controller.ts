@@ -11,7 +11,7 @@ export class BooksController {
         private bookService: BooksService
     ){}
 
-    @Post()
+  @Post()
   createTodo(@Body() body: CreateBookInput) {
     return this.bookService.createBook(body)
   }
